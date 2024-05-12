@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.google.devtools.ksp)
+    alias(libs.plugins.androidx.room.plugin)
 }
 
 android {
@@ -19,7 +21,9 @@ android {
             useSupportLibrary = true
         }
     }
-
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -47,6 +51,17 @@ android {
 }
 
 dependencies {
+
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
+    testImplementation(libs.androidx.room.testing)
+    implementation(libs.androidx.room.ktx)
+
+    implementation(libs.coil.compose)
+
+    implementation(libs.moshi.kotlin)
+    ksp(libs.moshi.kotlin.codegen)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
