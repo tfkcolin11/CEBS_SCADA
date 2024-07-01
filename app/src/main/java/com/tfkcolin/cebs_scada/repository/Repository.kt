@@ -42,10 +42,9 @@ private val MY_UUID_INSECURE = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c
 data class BluetoothFunctionHolder(
     val write: (out: ByteArray?, onError: (String) -> Unit) -> Unit,
     val stop: () -> Unit,
-    val startDiscovery: (context: Context) -> Unit,
-    val stopDiscovery: (context: Context) -> Unit,
+    val startDiscovery: () -> Unit,
+    val stopDiscovery: () -> Unit,
     val connect: suspend (device: BluetoothDevice,
-                          context: Context,
                           uuid: UUID,
                           onConnectionFailed: (String) -> Unit) -> Unit
 )
